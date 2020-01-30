@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://fgpe.usz.edu.pl/yapexil.schema.json",
+    "$id": "https://github.com/FGPE-Erasmus/format-specifications/blob/master/schemas/yapexil.schema.json",
     "title": "Yet Another Programming Exercise Interoperability Language",
-    "description": "The schema for describing programming exercises.",
+    "description": "JSON schema for describing a programming exercise package, based on PExIL - an XML dialect that aims to consolidate all the data required in the programming exercise life-cycle. YAPExIL aims for simplicity while covering most features of a task package as described by Verhoeff's model, i.e., a unit for collecting, storing, archiving, and exchanging all information concerning with a programming task.",
     "type": "object",
     "required": [
         "id",
@@ -19,7 +19,7 @@
     "properties": {
         "id": {
             "title": "ID",
-            "description": "Unique identifier of the exercise.",
+            "description": "UUID of the exercise.",
             "type": "string"
         },
         "title": {
@@ -29,7 +29,7 @@
         },
         "module": {
             "title": "Module",
-            "description": "Module in which the exercise is in.",
+            "description": "Module in which the exercise is in (description of its main topic).",
             "type": "string"
         },
         "author": {
@@ -209,19 +209,14 @@
         "tests": {
             "title": "Tests",
             "description": "Set(s) of test cases to validate if attempts are correct.",
-            "oneOf": [{
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/TestSet"
-                },
-                "minItems": 1
-            }, {
-                "type": "array",
-                "items": {
-                    "$ref": "#/definitions/Test"
-                },
-                "minItems": 1
-            }]
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    { "$ref": "#/definitions/Test" },
+                    { "$ref": "#/definitions/TestSet" }
+                ]
+            },
+            "minItems": 1
         }
     },
     "definitions": {
@@ -232,7 +227,7 @@
             "properties": {
                 "id": {
                     "title": "ID",
-                    "description": "Unique identifier of the test.",
+                    "description": "UUID of the test.",
                     "type": "string"
                 },
                 "input": {
@@ -280,7 +275,7 @@
             "properties": {
                 "id": {
                     "title": "ID",
-                    "description": "Unique identifier of the test set.",
+                    "description": "UUID of the test set.",
                     "type": "string"
                 },
                 "tests": {

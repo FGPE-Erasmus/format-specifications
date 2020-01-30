@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://fgpe.usz.edu.pl/gedil.schema.json",
+    "$id": "https://github.com/FGPE-Erasmus/format-specifications/blob/master/schemas/gedil.schema.json",
     "title": "Gamified Education Interoperability Language",
-    "description": "The schema for describing gamified education layers.",
+    "description": "JSON schema designed to describe gamification layers for educational contexts. Although designed to fulfil the specific requirements of gamification applied in programming courses, GEdIL is sufficiently generic to be applied to any other educational subjects as it only delineates a layer with the gamification elements that should lay on top of another layer describing activities.",
     "type": "object",
     "required": [
         "id",
@@ -17,7 +17,7 @@
     "properties": {
         "id": {
             "title": "ID",
-            "description": "Unique identifier of the gamification layer.",
+            "description": "UUID of the gamification layer.",
             "type": "string"
         },
         "name": {
@@ -71,7 +71,7 @@
         },
         "leaderboards": {
             "title": "Leaderboards",
-            "description": "Set of leaderboards given on the top-level.",
+            "description": "Set of leaderboards on the top-level.",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/Leaderboard"
@@ -80,7 +80,7 @@
         },
         "challenges": {
             "title": "Challenges",
-            "description": "Set of challenges in the gamification layer.",
+            "description": "Set of top-level challenges.",
             "type": "array",
             "items": {
                 "$ref": "#/definitions/Challenge"
@@ -115,7 +115,7 @@
             "properties": {
                 "id": {
                     "title": "ID",
-                    "description": "Unique identifier of the challenge.",
+                    "description": "UUID of the challenge.",
                     "type": "string"
                 },
                 "name": {
@@ -130,7 +130,7 @@
                 },
                 "refs": {
                     "title": "References",
-                    "description": "Reference to non-gamified exercises of this challenge or sub-challenges of this challenge.",
+                    "description": "Reference to non-gamified exercises of this challenge.",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -138,14 +138,14 @@
                 },
                 "mode": {
                     "title": "Mode",
-                    "description": "The mode in which the programming exercise should be solved (e.g., shortening, speedup, or time-bomb).",
+                    "description": "The mode in which the programming exercise should be solved.",
                     "type": "string",
                     "enum": ["NORMAL", "SHAPESHIFTER", "SHORTENING", "SPEEDUP", "HACK_IT", "TIME_BOMB", "DUEL"],
                     "default": "NORMAL"
                 },
                 "mode_parameters": {
                     "title": "Mode Parameters",
-                    "description": "Parameters to adjust the challenge according to the mode.",
+                    "description": "Parameters to adjust the challenge according to the mode (e.g., threshold number of lines, threshold execution time, or time of the bomb).",
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -177,7 +177,7 @@
                 },
                 "feedback_generators": {
                     "title": "Feedback Generators",
-                    "description": "External programs that generate the feedback to give to the student about his/her attempt to achieve a solution.",
+                    "description": "External programs that generate the feedback to give to the student when the challenge is complete.",
                     "type": "array",
                     "items": {
                         "title": "Feedback Generator",
@@ -222,16 +222,36 @@
                 },
                 "leaderboards": {
                     "title": "Leaderboards",
-                    "description": "Set of leaderboards in the challenge defined by a distinct ordered set of metrics.",
+                    "description": "Set of leaderboards in the challenge.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Leaderboard"
                     },
                     "default": []
+                },
+                "children": {
+                    "title": "Children",
+                    "description": "Sub-challenges of this challenge.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Challenge"
+                    },
+                    "default": []
                 }
             },
             "required": [
-                "id", "name", "refs", "mode", "locked", "hidden", "difficulty", "feedback_generators", "rules", "rewards", "leaderboards"
+                "id",
+                "name",
+                "refs",
+                "mode",
+                "locked",
+                "hidden",
+                "difficulty",
+                "feedback_generators",
+                "rules",
+                "rewards",
+                "leaderboards",
+                "children"
             ]
         },
         "Reward": {
@@ -241,7 +261,7 @@
             "properties": {
                 "id": {
                     "title": "ID",
-                    "description": "Unique identifier of the reward.",
+                    "description": "UUID of the reward.",
                     "type": "string"
                 },
                 "name": {
@@ -324,7 +344,7 @@
             "properties": {
                 "id": {
                     "title": "ID",
-                    "description": "Unique identifier of the rule.",
+                    "description": "UUID of the rule.",
                     "type": "string"
                 },
                 "name": {
@@ -377,7 +397,7 @@
             "properties": {
                 "id": {
                     "title": "ID",
-                    "description": "Unique identifier of the criteria.",
+                    "description": "UUID of the criteria.",
                     "type": "string"
                 },
                 "conditions": {
@@ -446,7 +466,7 @@
             "properties": {
                 "id": {
                     "title": "ID",
-                    "description": "Unique identifier of the leaderboard.",
+                    "description": "UUID of the leaderboard.",
                     "type": "string"
                 },
                 "name": {
