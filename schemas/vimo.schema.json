@@ -36,8 +36,7 @@
             "description": "Map of assets in the animation indexed by ID.",
             "patternProperties": {
                 "^[^\\/?%*:|\"<>\\.]+$": {
-                    "$ref": "#/definitions/Asset",
-                    "description": "An image in Mooshak 2.0."
+                    "$ref": "#/definitions/Asset"
                 }
             },
             "additionalProperties": false
