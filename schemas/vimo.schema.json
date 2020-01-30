@@ -1,0 +1,522 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://github.com/FGPE-Erasmus/format-specifications/blob/master/schemas/vimo.schema.json",
+    "title": "Vectors In Motion",
+    "description": "This JSON schema describes a complete animation with vector graphics, frame by frame.",
+    "type": "object",
+    "required": [
+        "title",
+        "width",
+        "height",
+        "fps",
+        "frames"
+    ],
+    "properties": {
+        "title": {
+            "type": "string",
+            "description": "The title of the animation."
+        },
+        "width": {
+            "title": "Width",
+            "description": "The width (in pixels) of the animation.",
+            "type": "integer"
+        },
+        "height": {
+            "title": "Height",
+            "description": "The height (in pixels) of the animation.",
+            "type": "integer"
+        },
+        "fps": {
+            "title": "Frames Per Second",
+            "description": "The number of frames per second of the animation.",
+            "type": "integer"
+        },
+        "assets": {
+            "type": "object",
+            "description": "Map of assets in the animation indexed by ID.",
+            "patternProperties": {
+                "^[^\\/?%*:|\"<>\\.]+$": {
+                    "$ref": "#/definitions/Asset",
+                    "description": "An image in Mooshak 2.0."
+                }
+            },
+            "additionalProperties": false
+        },
+        "frames": {
+            "title": "Frames",
+            "description": "Set of frames of the animation.",
+            "type": "array",
+            "items": {
+                "allOf": [{
+                    "$ref": "#/definitions/Frame"
+                }]
+            },
+            "minItems": 1
+        }
+    },
+    "additionalProperties": false,
+    "definitions": {
+        "Frame": {
+            "type": "object",
+            "title": "The schema of a frame of the animation",
+            "description": "A frame of a animation contains the elements to be drawn in the canvas, messages to be displayed, etc.",
+            "required": [
+                "items"
+            ],
+            "properties": {
+                "items": {
+                    "title": "Items",
+                    "description": "The items (i.e., elements) of a frame.",
+                    "type": "array",
+                    "items": {
+                        "allOf": [{
+                            "$ref": "#/definitions/FrameItem"
+                        }]
+                    }
+                },
+                "messages": {
+                    "title": "Messages",
+                    "description": "Log messages to display.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "FrameItem": {
+            "title": "Frame Item",
+            "description": "An item of a frame of a animation is a sprite which will be drawn in a certain position of the canvas with a given rotation and scale.",
+            "type": "object",
+            "required": [
+                "type",
+                "content"
+            ],
+            "properties": {
+                "type": {
+                    "title": "Type",
+                    "description": "Type of item.",
+                    "enum": [
+                        "T", "L", "C", "E", "R", "P", "I"
+                    ]
+                },
+                "content": {
+                    "title": "Content",
+                    "description": "Content of the item.",
+                    "type": "object",
+                    "anyOf": [
+                        { "$ref": "#/definitions/Text" },
+                        { "$ref": "#/definitions/Line" },
+                        { "$ref": "#/definitions/Circle" },
+                        { "$ref": "#/definitions/Ellipse" },
+                        { "$ref": "#/definitions/Rectangle" },
+                        { "$ref": "#/definitions/Poly" },
+                        { "$ref": "#/definitions/Image" }
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "ViewWindow": {
+            "title": "View Window",
+            "description": "View window of the asset to display.",
+            "type": "object",
+            "required": [],
+            "properties": {
+                "start_x": {
+                    "type": "integer",
+                    "description": "The x coordinate of the upper-left corner of the window."
+                },
+                "start_y": {
+                    "type": "integer",
+                    "description": "The y coordinate of the upper-left corner of the window."
+                },
+                "width": {
+                    "type": "integer",
+                    "description": "Width of the window."
+                },
+                "height": {
+                    "type": "integer",
+                    "description": "Height of the window."
+                }
+            },
+            "additionalProperties": false
+        },
+        "Text": {
+            "title": "Text",
+            "description": "A shape used to create text.",
+            "type": "object",
+            "required": [
+                "text", "x", "y"
+            ],
+            "properties": {
+                "text": {
+                    "description": "The text.",
+                    "type": "string"
+                },
+                "x": {
+                    "description": "x coordinate of the starting point of the text baseline.",
+                    "type": "string"
+                },
+                "y": {
+                    "description": "y coordinate of the starting point of the text baseline.",
+                    "type": "string"
+                },
+                "dx": {
+                    "description": "Shifts the text position horizontally from a previous text element.",
+                    "type": "string"
+                },
+                "dy": {
+                    "description": "Shifts the text position vertically from a previous text element.",
+                    "type": "string"
+                },
+                "r": {
+                    "description": "Rotates orientation of each individual glyph. Can rotate glyphs individually.",
+                    "type": "string"
+                },
+                "tl": {
+                    "description": "Defines a width that the text should be scaled to fit.",
+                    "type": "string"
+                },
+                "la": {
+                    "description": "Defines how the text is stretched or compressed to fit the length.",
+                    "type": "string",
+                    "enum": [
+                        "SPACING",
+                        "ALL"
+                    ],
+                    "default": "ALL"
+                },
+                "attrs": {
+                    "description": "Extra attributes that can be added to a text.",
+                    "$ref": "#/definitions/ShapeAttributes"
+                }
+            },
+            "additionalProperties": false
+        },
+        "Line": {
+            "title": "Line",
+            "description": "A basic shape used to create a line connecting two points.",
+            "type": "object",
+            "required": [
+                "x1", "y1", "x2", "y2"
+            ],
+            "properties": {
+                "x1": {
+                    "description": "x-axis coordinate of the line starting point.",
+                    "type": "string"
+                },
+                "y1": {
+                    "description": "y-axis coordinate of the line starting point.",
+                    "type": "string"
+                },
+                "x2": {
+                    "description": "x-axis coordinate of the line ending point.",
+                    "type": "string"
+                },
+                "y2": {
+                    "description": "y-axis coordinate of the line ending point.",
+                    "type": "string"
+                },
+                "attrs": {
+                    "description": "Extra attributes that can be added to a line.",
+                    "$ref": "#/definitions/ShapeAttributes"
+                }
+            },
+            "additionalProperties": false
+        },
+        "Circle": {
+            "title": "Circle",
+            "description": "A shape used to draw circles based on a center point and a radius.",
+            "type": "object",
+            "required": [
+                "cx", "cy"
+            ],
+            "properties": {
+                "cx": {
+                    "description": "x-axis coordinate of the center of the circle.",
+                    "type": "string"
+                },
+                "cy": {
+                    "description": "y-axis coordinate of the center of the circle.",
+                    "type": "string"
+                },
+                "r": {
+                    "description": "Radius of the circle.",
+                    "type": "string",
+                    "default": "0"
+                },
+                "attrs": {
+                    "description": "Extra attributes that can be added to a circle.",
+                    "$ref": "#/definitions/ShapeAttributes"
+                }
+            },
+            "additionalProperties": false
+        },
+        "Ellipse": {
+            "title": "Ellipse",
+            "description": "A shape used to create ellipses based on a center coordinate, and both their x and y radius.",
+            "type": "object",
+            "required": [
+                "cx", "cy"
+            ],
+            "properties": {
+                "cx": {
+                    "description": "x-axis coordinate of the center of the ellipse.",
+                    "type": "string"
+                },
+                "cy": {
+                    "description": "y-axis coordinate of the center of the ellipse.",
+                    "type": "string"
+                },
+                "rx": {
+                    "description": "Radius of the ellipse on the x-axis.",
+                    "type": "string",
+                    "default": "auto"
+                },
+                "ry": {
+                    "description": "Radius of the ellipse on the y-axis.",
+                    "type": "string",
+                    "default": "auto"
+                },
+                "attrs": {
+                    "description": "Extra attributes that can be added to a ellipse.",
+                    "$ref": "#/definitions/ShapeAttributes"
+                }
+            },
+            "additionalProperties": false
+        },
+        "Rectangle": {
+            "title": "Rectangle",
+            "description": "A shape used to create rectangles, defined by their position, width, and height. The rectangles may have their corners rounded.",
+            "type": "object",
+            "required": [
+                "x", "y", "w", "h"
+            ],
+            "properties": {
+                "x": {
+                    "description": "x-axis coordinate of the top-left corner of the rectangle.",
+                    "type": "string"
+                },
+                "y": {
+                    "description": "y-axis coordinate of the top-left corner of the rectangle.",
+                    "type": "string"
+                },
+                "w": {
+                    "description": "Width of the rectangle.",
+                    "type": "string"
+                },
+                "h": {
+                    "description": "Height of the rectangle.",
+                    "type": "string"
+                },
+                "rx": {
+                    "description": "The horizontal corner radius of the rect. Defaults to ry if it is specified.",
+                    "type": "string",
+                    "default": "0"
+                },
+                "ry": {
+                    "description": "The vertical corner radius of the rect. Defaults to rx if it is specified.",
+                    "type": "string",
+                    "default": "0"
+                },
+                "attrs": {
+                    "description": "Extra attributes that can be added to a ellipse.",
+                    "$ref": "#/definitions/ShapeAttributes"
+                }
+            },
+            "additionalProperties": false
+        },
+        "Poly": {
+            "title": "Poly",
+            "description": "A shape used to create polylines and polygons.",
+            "type": "object",
+            "required": [
+                "points"
+            ],
+            "properties": {
+                "points": {
+                    "description": "The list of points (pairs of x,y absolute coordinates) required to draw the poly.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "x": {
+                                "type": "integer"
+                            },
+                            "y": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                },
+                "attrs": {
+                    "description": "Extra attributes that can be added to a ellipse.",
+                    "$ref": "#/definitions/ShapeAttributes"
+                }
+            },
+            "additionalProperties": false
+        },
+        "Image": {
+            "title": "Image",
+            "description": "A shape used to create images.",
+            "type": "object",
+            "required": [
+                "asset", "x", "y"
+            ],
+            "properties": {
+                "asset": {
+                    "description": "The ID of the asset linked to this shape.",
+                    "type": "string"
+                },
+                "x": {
+                    "description": "x coordinate of the starting point of the image top-left corner.",
+                    "type": "string"
+                },
+                "y": {
+                    "description": "y coordinate of the starting point of the image top-left corner.",
+                    "type": "string"
+                },
+                "w": {
+                    "description": "The width of the image in the frame.",
+                    "type": "string"
+                },
+                "h": {
+                    "description": "The height of the image in the frame.",
+                    "type": "string"
+                },
+                "r": {
+                    "description": "The rotation of the image in the frame.",
+                    "type": "string"
+                },
+                "view_window": {
+                    "description": "View window of the sprite to display.",
+                    "$ref": "#/definitions/ViewWindow"
+                },
+                "attrs": {
+                    "description": "Extra attributes that can be added to a ellipse.",
+                    "$ref": "#/definitions/ShapeAttributes"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ShapeAttributes": {
+            "title": "Shape Attributes",
+            "description": "Extra attributes that can be added to shapes.",
+            "type": "object",
+            "properties": {
+                "style": {
+                    "title": "Style",
+                    "description": "Allows to style an element using CSS declarations (ignored if drawing in canvas).",
+                    "type": "string"
+                },
+                "class": {
+                    "title": "Class",
+                    "description": "Assigns a CSS class name or set of class names to an element (ignored if drawing in canvas).",
+                    "type": "string"
+                },
+                "clip_path": {
+                    "title": "Clip Path",
+                    "description": "Defines or associates a clipping path with the element.",
+                    "type": "string"
+                },
+                "fill": {
+                    "title": "Fill",
+                    "description": "Defines the color used to paint the element.",
+                    "type": "string"
+                },
+                "fill_opacity": {
+                    "title": "Fill Opacity",
+                    "description": "Defines the opacity of the filling color.",
+                    "type": "string"
+                },
+                "filter": {
+                    "title": "Filter",
+                    "description": "Filter effects that should be applied to element.",
+                    "type": "string"
+                },
+                "mask": {
+                    "title": "Mask",
+                    "description": "Associates a mask with the element.",
+                    "type": "string"
+                },
+                "opacity": {
+                    "title": "Opacity",
+                    "description": "Defines the opacity of the element.",
+                    "type": "string"
+                },
+                "stroke": {
+                    "title": "Stroke",
+                    "description": "Defines the color used to paint the outline of the shape.",
+                    "type": "string"
+                },
+                "stroke_width": {
+                    "title": "Stroke Width",
+                    "description": "Defines the width of the stroke to be applied to the shape.",
+                    "type": "string"
+                },
+                "stroke_opacity": {
+                    "title": "Stroke Opacity",
+                    "description": "Defines the opacity of the stroke color.",
+                    "type": "string"
+                },
+                "stroke_dasharray": {
+                    "title": "Stroke Dash Array",
+                    "description": "Defines the pattern of dashes and gaps used to paint the outline of the shape.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "stroke_dashoffset": {
+                    "title": "Stroke Dash Offset",
+                    "description": "Defines an offset on the rendering of the associated dash array.",
+                    "type": "string"
+                },
+                "stroke_linecap": {
+                    "title": "Stroke Linecap",
+                    "description": "Defines the shape to be used at the end of open subpaths when they are stroked.",
+                    "type": "string"
+                },
+                "stroke_linejoin": {
+                    "title": "Stroke Linejoin",
+                    "description": "Defines the shape to be used at the corners of paths when they are stroked.",
+                    "type": "string"
+                },
+                "transform": {
+                    "title": "Transform",
+                    "description": "Defines a list of transform definitions that are applied to an element and the element.",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "Asset": {
+            "title": "Asset",
+            "description": "An external asset used in the animation.",
+            "type": "object",
+            "required": [
+                "type",
+                "content"
+            ],
+            "properties": {
+                "type": {
+                    "title": "Type",
+                    "description": "Type of asset.",
+                    "enum": [
+                        "EMBEDDABLE",
+                        "URL",
+                        "DATA_URL"
+                    ]
+                },
+                "content": {
+                    "title": "Content",
+                    "description": "Content of the asset (either a URL or a file name).",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}
