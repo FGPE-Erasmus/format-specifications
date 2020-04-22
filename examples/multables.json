@@ -1,0 +1,148 @@
+{
+  "$schema": "../schemas/gedil.schema.json",
+  "id": "Multables",
+  "name": "Multiplication tables' party",
+  "description": "A sample gamification layer for teaching multiplication tables.",
+  "keywords": ["multiplication table", "times table", "maths"],
+  "status": "DRAFT",
+  "challenges": [
+    {
+      "id": "D1",
+      "name": "Solve 2x?",
+      "description": "Solve the 2 times table.",
+      "difficulty": "BEGINNER",
+      "locked": false,
+      "hidden": false,
+      "mode": "NORMAL",
+      "mode_parameters": [],
+      "refs": [
+        "A2.1",
+        "A2.2",
+        "A2.3",
+        "A2.4",
+        "A2.5",
+        "A2.6",
+        "A2.7",
+        "A2.8",
+        "A2.9",
+        "A2.10"
+      ],
+      "children": [],
+      "rewards": [
+        {
+          "id": "RwB",
+          "name": "Master of 2",
+          "description": "Complete the 2 times table",
+          "kind": "BADGE"
+        }
+      ],
+      "rules": [],
+      "leaderboards": []
+    },
+    {
+      "id": "D2",
+      "name": "Solve 9x9",
+      "description": "Solve 9x9 to unlock 10 times table",
+      "difficulty": "EASY",
+      "locked": false,
+      "hidden": false,
+      "mode": "NORMAL",
+      "mode_parameters": [],
+      "refs": [
+        "A9.9"
+      ],
+      "children": [],
+      "rewards": [
+        {
+          "id": "RwU",
+          "name": "Unlock 10x",
+          "description": "Unlock the 10 times table",
+          "kind": "UNLOCK",
+          "unlockables": [
+            {
+              "type": "CHALLENGE",
+              "id": "D3"
+            }
+          ]
+        }
+      ],
+      "rules": [],
+      "leaderboards": []
+    },
+    {
+      "id": "D3",
+      "name": "Locked 10",
+      "description": "The initially locked 10 times table",
+      "difficulty": "EASY",
+      "locked": true,
+      "hidden": false,
+      "mode": "NORMAL",
+      "mode_parameters": [],
+      "refs": [
+        "A10.1",
+        "A10.2",
+        "A10.3",
+        "A10.4",
+        "A10.5",
+        "A10.6",
+        "A10.7",
+        "A10.8",
+        "A10.9",
+        "A10.10"
+      ],
+      "children": [],
+      "rewards": [],
+      "rules": [],
+      "leaderboards": []
+    }
+  ],
+  "rewards": [
+    {
+      "id": "RwP",
+      "name": "Point",
+      "description": "Point awarded per solved exercise",
+      "kind": "POINT",
+      "amount": 1
+    }
+  ],
+  "rules": [
+    {
+      "id": "R1",
+      "name": "Give Point for Solved",
+      "criteria": {
+        "id": "R1",
+        "conditions": [
+          {
+            "left_entity": "EVENT",
+            "left_property": "$.type",
+            "comparing_function": "EQUAL",
+            "right_entity": "FIXED",
+            "right_property": "SUBMISSION_RESULT"
+          },
+          {
+            "left_entity": "EVENT",
+            "left_property": "$.value",
+            "comparing_function": "EQUAL",
+            "right_entity": "FIXED",
+            "right_property": "ACCEPTED"
+          }
+        ],
+        "junctors": ["AND"]
+      },
+      "actions": [
+        {
+          "type": "GIVE",
+          "parameters": ["RwP"]
+        }
+      ]
+    }
+  ],
+  "leaderboards": [
+    {
+      "id": "LP",
+      "name": "Top Points",
+      "metrics": ["points"],
+      "sorting_orders": ["DESC"]
+    }
+  ]
+}

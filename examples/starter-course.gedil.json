@@ -1,0 +1,186 @@
+{
+  "$schema": "../schemas/gedil.schema.json",
+  "id": "C0",
+  "name": "Starter Programming Course",
+  "description": "This is a GEdIL definition of a starter programming course for validation purposes.",
+  "keywords": ["programming", "starter"],
+  "status": "DRAFT",
+  "challenges": [
+    {
+      "id": "D0",
+      "name": "The Very First",
+      "description": "Solve the first exercise.",
+      "refs": [
+        "E0"
+      ],
+      "difficulty": "BEGINNER",
+      "mode": "NORMAL",
+      "mode_parameters": [],
+      "hidden": false,
+      "locked": false,
+      "rules": [],
+      "rewards": [
+        {
+          "id": "RwD0",
+          "name": "The Morning Star",
+          "description": "The first to say 'hello'.",
+          "kind": "BADGE",
+          "criteria": {
+            "id": "RwD0C",
+            "conditions": [
+              {
+                "right_entity": "ENVIRONMENT",
+                "right_property": "$.submissions.length",
+                "comparing_function": "EQUAL",
+                "left_entity": "FIXED",
+                "left_property": "1"
+              }
+            ],
+            "junctors": []
+          }
+        }
+      ],
+      "leaderboards": [],
+      "children": []
+    },
+    {
+      "id": "D1",
+      "name": "Ok, if you know how to sum...",
+      "description": "Solve the second and third exercises.",
+      "refs": [
+        "D1.1",
+        "D1.2"
+      ],
+      "difficulty": "AVERAGE",
+      "mode": "NORMAL",
+      "mode_parameters": [],
+      "hidden": false,
+      "locked": false,
+      "rules": [],
+      "leaderboards": [],
+      "rewards": [],
+      "children": [
+        {
+          "id": "D1.1",
+          "name": "Solve E1",
+          "description": "Solve the second exercise.",
+          "refs": [
+            "E1"
+          ],
+          "difficulty": "EASY",
+          "hidden": false,
+          "locked": false,
+          "mode": "NORMAL",
+          "mode_parameters": [],
+          "rewards": [
+            {
+              "id": "RwD1.1",
+              "name": "Unlock D1.2",
+              "description": "D1.2 unlocks when D1.1 is solved.",
+              "kind": "UNLOCK",
+              "unlockables": [
+                {
+                  "type": "CHALLENGE",
+                  "id": "D1.2"
+                }
+              ]
+            }
+          ],
+          "rules": [],
+          "leaderboards": [],
+          "children": []
+        },
+        {
+          "id": "D1.2",
+          "name": "Solve E2",
+          "description": "Solve the third exercise.",
+          "refs": [
+            "E2"
+          ],
+          "difficulty": "EASY",
+          "hidden": false,
+          "locked": true,
+          "mode": "NORMAL",
+          "mode_parameters": [],
+          "leaderboards": [],
+          "rewards": [],
+          "rules": [],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "D2",
+      "name": "The faster, the better",
+      "description": "Solve E1, E2, and E3.",
+      "refs": [
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "difficulty": "HARD",
+      "hidden": false,
+      "locked": false,
+      "mode": "NORMAL",
+      "mode_parameters": [],
+      "leaderboards": [
+        {
+          "id": "D2L",
+          "name": "Sum E1, E2, and E3",
+          "metrics": [
+            "execution_time"
+          ],
+          "sorting_orders": [
+            "ASC"
+          ]
+        }
+      ],
+      "rewards": [],
+      "rules": [],
+      "children": []
+    },
+    {
+      "id": "D3",
+      "name": "Solve everything",
+      "description": "Solve E0, E1, E2, and E3.",
+      "refs": [
+        "E0",
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "difficulty": "HARD",
+      "hidden": false,
+      "locked": false,
+      "mode": "NORMAL",
+      "mode_parameters": [],
+      "leaderboards": [],
+      "rewards": [
+        {
+          "id": "RwD3",
+          "name": "Tenacious",
+          "description": "Solves E0, E1, E2, and E3 with more than 5 submissions",
+          "kind": "BADGE",
+          "criteria": {
+            "id": "RwD3C",
+            "conditions": [
+              {
+                "left_entity": "PLAYER",
+                "left_property": "$.submissions.length",
+                "comparing_function": "GREATER_THAN",
+                "right_entity": "FIXED",
+                "right_property": "5"
+              }
+            ],
+            "junctors": []
+          }
+        }
+      ],
+      "rules": [],
+      "children": []
+    }
+  ],
+  "rewards": [],
+  "rules": [],
+  "leaderboards": []
+}

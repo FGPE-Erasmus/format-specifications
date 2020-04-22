@@ -293,23 +293,20 @@
                     "items": {
                         "title": "Unlockable",
                         "description": "A challenge or exercise that gets unlocked.",
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "title": "ID",
-                                    "description": "UUID of the unlockable.",
-                                    "type": "string"
-                                },
-                                "type": {
-                                    "title": "Type",
-                                    "description": "Type of the unlockable.",
-                                    "enum": [
-                                        "EXERCISE",
-                                        "CHALLENGE"
-                                    ]
-                                }
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "title": "ID",
+                                "description": "UUID of the unlockable.",
+                                "type": "string"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "description": "Type of the unlockable.",
+                                "enum": [
+                                    "EXERCISE",
+                                    "CHALLENGE"
+                                ]
                             }
                         }
                     }
@@ -321,23 +318,20 @@
                     "items": {
                         "title": "Revealable",
                         "description": "A challenge or exercise that gets revealed.",
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "title": "ID",
-                                    "description": "UUID of the revealable.",
-                                    "type": "string"
-                                },
-                                "type": {
-                                    "title": "Type",
-                                    "description": "Type of the revealable.",
-                                    "enum": [
-                                        "EXERCISE",
-                                        "CHALLENGE"
-                                    ]
-                                }
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "title": "ID",
+                                "description": "UUID of the revealable.",
+                                "type": "string"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "description": "Type of the revealable.",
+                                "enum": [
+                                    "EXERCISE",
+                                    "CHALLENGE"
+                                ]
                             }
                         }
                     }
