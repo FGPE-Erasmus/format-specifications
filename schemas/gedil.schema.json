@@ -381,6 +381,15 @@
                     "description": "Name of the rule.",
                     "type": "string"
                 },
+                "triggers": {
+                    "title": "Triggers",
+                    "description": "Events or situations that will cause a rule to run.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Trigger"
+                    },
+                    "minItems": 1
+                },
                 "criteria": {
                     "title": "Criteria",
                     "description": "Criteria for executing actions.",
@@ -487,6 +496,52 @@
                 }
             },
             "required": ["id", "conditions", "junctors"]
+        },
+        "Trigger": {
+            "title": "Trigger",
+            "description": "An event or situation that will cause a rule to run.",
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "title": "Type of trigger",
+                    "description": "The type of trigger (time- or action-based).",
+                    "type": "string",
+                    "enum": [
+                        "TIMESTAMP",
+                        "INTERVAL",
+                        "CRONJOB",
+                        "SUBMISSION_RECEIVED",
+                        "SUBMISSION_EVALUATED",
+                        "SUBMISSION_ACCEPTED",
+                        "SUBMISSION_REJECTED",
+                        "CHALLENGE_COMPLETED",
+                        "CHALLENGE_FAILED",
+                        "REWARD_GRANTED",
+                        "PLAYER_UPDATED",
+                        "POINTS_UPDATED",
+                        "DUEL_INITIATED",
+                        "DUEL_INVITATION_RECEIVED",
+                        "DUEL_ACCEPTED",
+                        "DUEL_REJECTED",
+                        "DUEL_COMPLETED"
+                    ]
+                },
+                "recurrent": {
+                    "title": "Recurrent",
+                    "description": "Is it recurrent?",
+                    "type": "boolean",
+                    "default": "true"
+                },
+                "parameters": {
+                    "title": "Parameters",
+                    "description": "Parameters of the trigger.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": []
+                }
+            }
         },
         "Leaderboard": {
             "title": "Leaderboard",
