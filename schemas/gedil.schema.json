@@ -281,6 +281,22 @@
                         "POINT", "BADGE", "VIRTUAL_ITEM", "COUPON", "REVEAL", "UNLOCK", "HINT", "MESSAGE"
                     ]
                 },
+                "recurrent": {
+                    "title": "Recurrent",
+                    "description": "Can this reward be achieved more than once?",
+                    "type": "boolean",
+                    "default": "true"
+                },
+                "cost": {
+                    "title": "Cost",
+                    "description": "The cost of the reward (0 if it cannot be bought).",
+                    "type": "number"
+                },
+                "image": {
+                    "title": "Image",
+                    "description": "An image of the reward to display in the game.",
+                    "type": "string"
+                },
                 "amount": {
                     "title": "Amount",
                     "description": "Quantity of the reward (if applicable).",
@@ -503,11 +519,19 @@
             "type": "object",
             "properties": {
                 "kind": {
-                    "title": "Type of trigger",
+                    "title": "Kind",
                     "description": "The type of trigger (time- or action-based).",
                     "type": "string",
                     "enum": [
-                        "TIMESTAMP",
+                        "TIME",
+                        "ACTION"
+                    ]
+                },
+                "event": {
+                    "title": "Event",
+                    "description": "The event that triggers.",
+                    "type": "string",
+                    "enum": [
                         "INTERVAL",
                         "CRONJOB",
                         "SUBMISSION_RECEIVED",
@@ -528,7 +552,7 @@
                 },
                 "recurrent": {
                     "title": "Recurrent",
-                    "description": "Is it recurrent?",
+                    "description": "Is the trigger recurrent?",
                     "type": "boolean",
                     "default": "true"
                 },
