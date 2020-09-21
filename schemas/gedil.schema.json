@@ -89,25 +89,6 @@
         }
     },
     "definitions": {
-        "AnyResource": {
-            "title": "Any Resource",
-            "description": "Reference to a challenge or a non-gamified exercise.",
-            "type": "object",
-            "properties": {
-                "type": {
-                    "title": "Type",
-                    "description": "Type of referred resource.",
-                    "enum": ["CHALLENGE", "EXERCISE"],
-                    "type": "string"
-                },
-                "reference": {
-                    "title": "Reference",
-                    "description": "Reference to resource.",
-                    "type": "string"
-                }
-            },
-            "required": ["type", "reference"]
-        },
         "Challenge": {
             "title": "Challenge",
             "description": "Schema for describing a challenge in a gamified programming course.",
@@ -302,80 +283,25 @@
                     "description": "Quantity of the reward (if applicable).",
                     "type": "number"
                 },
-                "unlockables": {
-                    "title": "Unlockables",
-                    "description": "List of resources that get unlocked (if applicable).",
-                    "type": "array",
-                    "items": {
-                        "title": "Unlockable",
-                        "description": "A challenge or exercise that gets unlocked.",
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "title": "ID",
-                                "description": "UUID of the unlockable.",
-                                "type": "string"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "description": "Type of the unlockable.",
-                                "enum": [
-                                    "EXERCISE",
-                                    "CHALLENGE"
-                                ]
-                            }
-                        }
-                    }
+                "message": {
+                    "title": "Message",
+                    "description": "Message either to help solving an exercise or congratulate the user (if applicable).",
+                    "type": "string"
                 },
-                "revealables": {
-                    "title": "Revealables",
-                    "description": "List of resources that get revealed (if applicable).",
+                "challenges": {
+                    "title": "Challenges",
+                    "description": "List of challenges that get unlocked/revealed (if applicable).",
                     "type": "array",
                     "items": {
-                        "title": "Revealable",
-                        "description": "A challenge or exercise that gets revealed.",
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "title": "ID",
-                                "description": "UUID of the revealable.",
-                                "type": "string"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "description": "Type of the revealable.",
-                                "enum": [
-                                    "EXERCISE",
-                                    "CHALLENGE"
-                                ]
-                            }
-                        }
-                    }
-                },
-                "hints": {
-                    "title": "Hints",
-                    "description": "Messages that help solving the challenge (if applicable).",
-                    "type": "array",
-                    "items": {
-                        "title": "Hint",
-                        "description": "A message that helps solving the challenge.",
+                        "title": "ID",
+                        "description": "UUID of the challenge.",
                         "type": "string"
                     }
                 },
-                "congratulations": {
-                    "title": "Congratulations",
-                    "description": "Messages to congratulate the user (if applicable).",
-                    "type": "array",
-                    "items": {
-                        "title": "Congratulation",
-                        "description": "A message to congratulate the user.",
-                        "type": "string"
-                    }
-                },
-                "criteria": {
-                    "title": "Criteria",
-                    "description": "Criteria to obtain this reward.",
-                    "$ref": "#/definitions/Criteria"
+                "exercise": {
+                    "title": "Exercise",
+                    "description": "UUID of the exercise to which the hint refers (if applicable).",
+                    "type": "string"
                 }
             },
             "required": [

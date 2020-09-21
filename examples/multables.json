@@ -58,12 +58,7 @@
           "name": "Unlock 10x",
           "description": "Unlock the 10 times table",
           "kind": "UNLOCK",
-          "unlockables": [
-            {
-              "type": "CHALLENGE",
-              "id": "D3"
-            }
-          ]
+          "challenges": ["D3"]
         }
       ],
       "rules": [],

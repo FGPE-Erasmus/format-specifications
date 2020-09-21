@@ -78,12 +78,7 @@
               "name": "Unlock D1.2",
               "description": "D1.2 unlocks when D1.1 is solved.",
               "kind": "UNLOCK",
-              "unlockables": [
-                {
-                  "type": "CHALLENGE",
-                  "id": "D1.2"
-                }
-              ]
+              "challenges": ["D1.2"]
             }
           ],
           "rules": [],
