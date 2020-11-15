@@ -514,6 +514,12 @@
                     "description": "Name of the leaderboard.",
                     "type": "string"
                 },
+                "groups": {
+                    "title": "Groups",
+                    "description": "Is this leaderboard group scoped?",
+                    "type": "boolean",
+                    "default": "false"
+                },
                 "metrics": {
                     "title": "Metrics",
                     "description": "Metrics considered in this leaderboard, sorted by importance.",
