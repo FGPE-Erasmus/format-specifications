@@ -4,8 +4,8 @@ This repository contains the format specifications required for gamified program
 
 ## Acknowledgments
 
-<div class="d-flex flex-items-center">
-<div>
+<div style="display: flex; align-items: center; flex-gap: 10px">
+<div style="padding-right: 12px">
 
 This software has been developed as a part of the Framework for Gamified Programming Education project ([https://fgpe.usz.edu.pl/](https://fgpe.usz.edu.pl/)), co-funded by the Erasmus+ Programme of the European Union.
 
