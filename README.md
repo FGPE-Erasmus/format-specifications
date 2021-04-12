@@ -4,7 +4,7 @@ This repository contains the format specifications required for gamified program
 
 ## Acknowledgments
 
-<table border="0" cellspacing="0" cellpadding="0" style="padding: 0; margin: 0;">
+<table cellspacing="0" cellpadding="0" style="border: 0; padding: 0; margin: 0;">
 <tr>
 <td>
 
