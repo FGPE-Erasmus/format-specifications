@@ -4,12 +4,20 @@ This repository contains the format specifications required for gamified program
 
 ## Acknowledgments
 
+<table border="0" cellspacing="0" cellpadding="0" style="padding: 0; margin: 0;">
+<tr>
+<td>
+
 This software has been developed as a part of the Framework for Gamified Programming Education project ([https://fgpe.usz.edu.pl/](https://fgpe.usz.edu.pl/)), co-funded by the Erasmus+ Programme of the European Union.
 
-<p align="center">
-  <img alt="Framework for Gamified Programming Education project" src="./docs/logo_FGPE.jpg">
-  <img alt="Erasmus+" src="./docs/logo_erasmus.jpg">
-</p>
+</td>
+<td>
+
+![Framework for Gamified Programming Education project](docs/logo_FGPE.jpg) ![Erasmus+](docs/logo_erasmus.jpg)
+
+</td>
+</tr>
+</table>
 
 ## License
 
