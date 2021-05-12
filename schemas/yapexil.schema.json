@@ -224,15 +224,21 @@
         },
         "tests": {
             "title": "Tests",
+            "description": "Test cases to validate if attempts are correct.",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Test"
+            },
+            "minItems": 0
+        },
+        "testsets": {
+            "title": "Test Sets",
             "description": "Set(s) of test cases to validate if attempts are correct.",
             "type": "array",
             "items": {
-                "oneOf": [
-                    { "$ref": "#/definitions/Test" },
-                    { "$ref": "#/definitions/TestSet" }
-                ]
+                "$ref": "#/definitions/TestSet"
             },
-            "minItems": 1
+            "minItems": 0
         }
     },
     "definitions": {
