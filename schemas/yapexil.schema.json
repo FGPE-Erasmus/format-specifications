@@ -42,7 +42,7 @@
             "description": "Keywords of the exercise.",
             "type": "array",
             "items": {
-                "maxLength": 255,
+                "maxLength": 50,
                 "type": "string"
             }
         },
@@ -82,6 +82,22 @@
                 "HARD",
                 "MASTER"
             ]
+        },
+        "timeout": {
+            "title": "Timeout",
+            "description": "Timeout of the exercise.",
+            "type": "number",
+            "default": -1
+        },
+        "programmingLanguages": {
+            "title": "Programming Languages",
+            "description": "Programming languages in which the code can be written.",
+            "type": "array",
+            "items": {
+                "maxLength": 50,
+                "type": "string"
+            },
+            "default": []
         },
         "status": {
             "title": "Status",
@@ -259,6 +275,33 @@
                     "description": "Is this test visible to the user?",
                     "type": "boolean",
                     "default": false
+                },
+                "timeout": {
+                    "title": "Timeout",
+                    "description": "Timeout of this test.",
+                    "type": "number",
+                    "default": -1
+                },
+                "feedback": {
+                    "title": "Feedback",
+                    "description": "Feedback messages associated with the test.",
+                    "type": "object",
+                    "properties": {
+                        "message": {
+                            "title": "Message",
+                            "description": "The message.",
+                            "type": "string"
+                        },
+                        "weight": {
+                            "title": "Weight",
+                            "description": "The weight of this message.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "message",
+                        "weight"
+                    ]
                 }
             },
             "required": [
