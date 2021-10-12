@@ -301,12 +301,11 @@
                         "weight": {
                             "title": "Weight",
                             "description": "The weight of this message.",
-                            "type": "string"
+                            "type": "number"
                         }
                     },
                     "required": [
-                        "message",
-                        "weight"
+                        "message"
                     ]
                 }
             },
