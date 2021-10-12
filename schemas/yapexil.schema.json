@@ -249,7 +249,12 @@
             "properties": {
                 "id": {
                     "title": "ID",
-                    "description": "UUID of the test.",
+                    "description": "ID of the test.",
+                    "type": "string"
+                },
+                "name": {
+                    "title": "Name",
+                    "description": "Name of the test (e.g., T002).",
                     "type": "string"
                 },
                 "input": {
@@ -310,7 +315,6 @@
                 }
             },
             "required": [
-                "id",
                 "input",
                 "output",
                 "visible"
@@ -323,7 +327,12 @@
             "properties": {
                 "id": {
                     "title": "ID",
-                    "description": "UUID of the test set.",
+                    "description": "ID of the test set.",
+                    "type": "string"
+                },
+                "name": {
+                    "title": "Name",
+                    "description": "Name of the test set.",
                     "type": "string"
                 },
                 "tests": {
@@ -334,11 +343,6 @@
                         "$ref": "#/definitions/Test"
                     },
                     "minItems": 1
-                },
-                "name": {
-                    "title": "Name",
-                    "description": "Name of the test set.",
-                    "type": "string"
                 },
                 "weight": {
                     "title": "Weight",
@@ -353,8 +357,6 @@
                 }
             },
             "required": [
-                "id",
-                "name",
                 "tests",
                 "visible"
             ]
