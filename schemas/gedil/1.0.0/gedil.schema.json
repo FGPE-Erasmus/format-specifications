@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://github.com/FGPE-Erasmus/format-specifications/blob/master/schemas/gedil.schema.json",
+    "$id": "https://github.com/FGPE-Erasmus/format-specifications/blob/master/schemas/gedil/1.0.0/gedil.schema.json",
     "title": "Gamified Education Interoperability Language",
     "description": "JSON schema designed to describe gamification layers for educational contexts. Although designed to fulfil the specific requirements of gamification applied in programming courses, GEdIL is sufficiently generic to be applied to any other educational subjects as it only delineates a layer with the gamification elements that should lay on top of another layer describing activities.",
     "type": "object",
